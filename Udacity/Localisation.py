@@ -95,3 +95,45 @@ def sense(p, Z):
     p = sense(p,measurements[k])
 
 print p
+
+#EXACT MOTION
+
+#Program a function that returns a new distribution 
+#q, shifted to the right by U units. If U=0, q should 
+#be the same as p.
+
+p=[0.2, 0.2, 0.2, 0.2, 0.2]
+world=['green', 'red', 'red', 'green', 'green']
+Z = 'red'
+pHit = 0.6
+pMiss = 0.2
+q = []
+
+def sense(p, Z):
+
+    for i in range(5):
+        if world[i] == 'green':
+            p[i] = p[i]*pMiss
+        else:
+            p[i] = p[i]*pHit
+        q.append(p[i])
+
+    sum = 0
+    for k in range(len(p)):
+        sum += q[k]
+    print sum #0.36
+    
+    for b in range(len(p)):
+        q[b] = q[b]/sum
+  
+    return q
+
+def move(p, U):
+    t = []
+    for i in range(len(p)):
+        t.append(p[(i-U]%len(p))   
+    return t
+                 
+print move(p, 1)
+
+
