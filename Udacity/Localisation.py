@@ -136,4 +136,107 @@ def move(p, U):
                  
 print move(p, 1)
 
+#INEXACT MOTION
+
+#Modify the move function to accommodate the added 
+#probabilities of overshooting or undershooting 
+#the intended destination.
+
+p=[0, 1, 0, 0, 0]
+world=['green', 'red', 'red', 'green', 'green']
+measurements = ['red', 'green']
+pHit = 0.6
+pMiss = 0.2
+pExact = 0.8
+pOvershoot = 0.1
+pUndershoot = 0.1
+
+def sense(p, Z):
+    q=[]
+    for i in range(len(p)):
+        hit = (Z == world[i])
+        q.append(p[i] * (hit * pHit + (1-hit) * pMiss))
+    s = sum(q)
+    for i in range(len(q)):
+        q[i] = q[i] / s
+    return q
+
+def move(p, U):
+    q = []
+    for i in range(len(p)):
+        s = pExact*p[i-U%len(p)]
+        s = s + pOvershoot*p[i-U+1%len(p)]
+        s = s + pUndershoot*p[i-U-1%len(p)]
+        q.append(s)
+    return q
+
+#makes robot move twice
+p = move(p,1)
+p = move(p,1)
+
+#makes robot move 1000 times
+j = 0
+while (j < 1000):
+    p = move(p,1)
+    j=j+1
+
+print p
+
+#Given the list motions=[1,1] which means the robot 
+#moves right and then right again, compute the posterior 
+#distribution if the robot first senses red, then moves 
+#right one, then senses green, then moves right again, 
+#starting with a uniform prior distribution.
+
+p=[0.2, 0.2, 0.2, 0.2, 0.2]
+world=['green', 'red', 'red', 'green', 'green']
+measurements = ['red', 'green']
+motions = [1,1]
+pHit = 0.6
+pMiss = 0.2
+pExact = 0.8
+pOvershoot = 0.1
+pUndershoot = 0.1
+
+def sense(p, Z):
+
+    for i in range(5):
+        if world[i] == 'green':
+            p[i] = p[i]*pMiss
+        else: #red is detected
+            p[i] = p[i]*pHit
+        q.append(p[i])
+
+    sum = 0
+    for k in range(len(p)):
+        sum += q[k]
+    print sum #0.36
+    
+    for b in range(len(p)):
+        q[b] = q[b]/sum
+  
+    return q
+
+def move(p, U):
+    q = []
+    for i in range(len(p)):
+        s = pExact * p[(i-U) % len(p)]
+        s = s + pOvershoot * p[(i-U-1) % len(p)]
+        s = s + pUndershoot * p[(i-U+1) % len(p)]
+        q.append(s)
+    return q
+
+p = sense(p,measurements[0])
+p = move(p,motions[0])
+p = sense(p,measurements[1])
+p = move(p,motions[1])
+
+print p
+#[0.21157894736842103, 0.1515789473684211,
+#0.08105263157894739, 0.16842105263157897,
+#0.3873684210526316]
+
+#[G,R,R,G,G]. Max likelihood at far right G
+
+
 
