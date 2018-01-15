@@ -12,5 +12,4 @@ Aims
 - Path planning an "urban" environment
 - Create start and goal states for rover
 - Computer vision to detect obstacles 
-- Implement Djikstras' Algorithm for motion planning
 - Learn more about Python and usage in robotics
