@@ -50,6 +50,28 @@ ysoln = subs(soln, [a,b,c], [3,2,-6]);
 ysoln = simplify(ysoln)
 d = vpa(ysoln,9) %variable precision arithmetic
 
+%Solving ODEs
+
+%[tSol,ySol] = ode45(deriveFunction,interval of ind.variable,initialVaLUE)
+
+r = 1;
+K = 1000;
+odefun = @(t,P) r*P*(1-P/K); %independent then dependent
+tSpan = [0,10];
+p0 = 20;
+[tSol,pSol] = ode45(odefun,tSpan,p0);
+
+dxdt = @(t,x) [x(2); -x(2)-x(1)];
+tLim = [0,10];
+x0 = [0,1]; %initial conditions
+[tSol,xSol] = ode45(dxdt,tLim,x0);
+%times when numerical solutions was computed. matrix solution
+%containing x1 and x2
+%Higher order ODE -> first order ODE with new derivatives ->
+%first order vectored ODE
+
+
+
 
 
 
