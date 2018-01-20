@@ -9,7 +9,7 @@ Hardware
 - DC motors
 
 Aims
-- Path planning an "urban" environment
-- Create start and goal states for rover
-- Computer vision to detect obstacles 
-- Learn more about Python and usage in robotics
+- Computer vision to detect obstacles/path
+- Implement robot motion planning
+- Carry out Python and OpenCV image processing on the Raspberry Pi
+- Achieve autonomous onboard processing for rover motion
