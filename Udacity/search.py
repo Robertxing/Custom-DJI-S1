@@ -35,82 +35,61 @@ delta_name = ['^', '<', 'v', '>']
 
 def search(grid,init,goal,cost):
     
-    closed = [0 for row in range(len(grid[0]))] for col in range(leng(grid[
+    closed = [[0 for row in range(len(grid[0]))] for col in range(len(grid))]
     closed[init[0]][init[1]] = 1 #start is checked
 
     #intial values
     x = init[0]
     y = init[1]
     g = 0
+    expandCounter = 0
+    expand = [[-1 for row in range(len(grid[0]))] for col in range(len(grid))]
+
+    expand[init[0]][init[1]] = expandCounter
+    open_list = [[g,x,y]]
+    found = False  # flag that is set when search is complete
+    resign = False # flag set if we can't find expand
     
-    open_list = [[g,init]]
-    print 'initial list item'
-    initialCost = 0
-    open_list.insert(0,initialCost)
-    print open_list
-    print 'new open list:'
+    #print 'initial list item'
+    #initialCost = 0
+    #open_list.insert(0,initialCost)
+    #print open_list
+    #print 'new open list:'
     #open_list[0] = open_list[0]+1 #cost updated
     
-    '''
-    check grids to the left, right, up and down of currrent node
-    if not = 1 (not an obstacle)
-    add to open list items
-    find node with lowest cost value
-    '''
+    while found is False and resign is False:
+        if len(open_list) == 0:
+            resign = True
+            print 'fail'
+        else:
+            #remove node with lowest cost
+            open_list.sort()
+            open_list.reverse() #to get smallest node cost
+            nextNode = open_list.pop()
+            x = nextNode[1]
+            y = nextNode[2]
+            g = nextNode[0]
+            expand[x][y] = expandCounter
+            expandCounter += 1
 
-    #remove node with lowest cost
-    open_list.sort()
-    open_list.reverse() #to get smallest node cost
-    next = open_list.pop()
-    x = next[1]
-    y = next[2]
-    g = next[0]
+            #check to see if at goal
+            if (x == goal[0] and y == goal[1]):
+                found = True
+                print 'Found Goal state'
+                print nextNode
+            else:
+                #all four moves at once
+                for i in range(len(delta)):
+                    x2 = x + delta[i][0]
+                    y2 = y + delta[i][1]
+                    if (x2 >= 0 and x2 < len(grid) and y2 >= 0 and y2 < len(grid[0])):
+                        if closed[x2][y2] == 0 and grid[x2][y2] == 0:
+                            g2 = g + cost
+                            open_list.append([g2,x2,y2])
+                            closed[x2][y2] = 1 #don't search on this node again
+    return expand
 
-    #check to see if at goal
-    if x == goal[0] and y == goal[1]:
-        found = True
-        print 'Found Goal state'
-    
-    '''
-    #down shift
-    shiftD1 = x + delta[2][0]
-    shiftD2 = y + delta[2][1]
-    if (grid[shiftD1][shiftD2] != 1 and shiftD1 >= 0 and shiftD2 >= 0):
-        open_list[0] = open_list[0]+1
-        open_list[1:] = shiftD1,shiftD2
-    print open_list
-    '''
-    #all four moves at once
-    for i in range(len(delta)):
-        x2 = x + delta[i][0]
-        y2 = y + delta[i][1]
-        if (x2 >= 0 and x2 < len(grid) and y2 >= 0 and y2 > len(grid[0])):
-            if closed[x2][y2] == 0 and grid[x2][y2] == 0:
-               g2 = g + cost
-               open_list.append([g2,x2,y2])
-               closed[x2][y2] = 1 #don't search on this node again           
-   
-    path = open_list
-    
-    '''
-    take list item
-    [0,0,0]
-    new open list:
-    [1,1,0]
-    [1,0,1]
-    take list item
-    [1,0,1]
-    new open list:
-    [1,1,0]
-    [2,1,1]
-    '''
-    
-    return path
-
-goal = search(grid,init,goal,cost)
-print goal
-
+expand = search(grid,init,goal,cost)
 #expansion grid.
-
-    
-
+for i in range(len(expand)):
+    print expand[i] #step at which node was expanded
