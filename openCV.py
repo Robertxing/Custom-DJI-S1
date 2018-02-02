@@ -17,3 +17,6 @@ image = raw.array
 
 cv2.imshow("ImageTest", image)
 cv2.waitKey(0)
+
+#2d convolution filter
+
