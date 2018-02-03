@@ -227,6 +227,9 @@ astar = search(grid,init,goal,cost,heuristic)
 for i in range(len(grid)):
     print astar[i]
 
+#dynamic programming
+
+
 
 
 
