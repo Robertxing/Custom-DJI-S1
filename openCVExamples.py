@@ -24,7 +24,7 @@ cv2.waitKey(0)
 
 
 
-#(1)Core Operations - Basic operations on images
+#(1)Core Operations - Basic Operations on Images
 
 #modifying pixel values
 
