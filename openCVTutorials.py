@@ -1,5 +1,7 @@
 #introduction to openCV with Raspberry Pi
 
+#From pyimagesearch.com
+
 #testing camera photo
 
 #import packages
@@ -54,11 +56,11 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 	if key == ord("q"):
 		break
 
+#OpenCV Tutorials
+
 #(1)Core Operations - Basic Operations on Images
 
 #modifying pixel values
-
-
 
 
 
