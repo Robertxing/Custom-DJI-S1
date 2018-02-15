@@ -58,9 +58,13 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
 #OpenCV Tutorials
 
-#(1)Core Operations - Basic Operations on Images
+#(1)Core Operations
 
-#modifying pixel values
+
+
+
+
+
 
 
 
