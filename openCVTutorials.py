@@ -126,7 +126,7 @@ for frame in camera.capture_continuous(frameCapture,format = "bgr", use_video_po
     if key == ord("q"):
         break
 
-#3. Geometric Transformations
+#2. Geometric Transformations
 
 #translation = shift object's position. using matrix [1,0,t_x;0,1,t_y]
 
@@ -161,7 +161,39 @@ cv2.imshow('image',dst)
 cv2.waitKey(5000)
 cv2.destroyAllWindows()
 
-#affine transformation
+import cv2
+import numpy as np
+from picamera.array import PiRGBArray
+from picamera import PiCamera
+
+img = cv2.imread('test3.JPG')
+img = cv2.resize(img,(500,420))
+rows,cols,ch = img.shape
+
+#affine transformation. All parallel lines in image will be
+#parallel in the output image.
+
+pts1 = np.float32([[50,50],[200,50],[50,200]])
+pts2 = np.float32([[10,100],[200,50],[100,250]])
+
+M = cv2.getAffineTransform(pts1,pts2)
+dst = cv2.warpAffine(img,M,(cols,rows))
+
+#perspective transformation
+#3x3 transformation matrix. 4 points on input image with 3 not collinear
+
+pts1 = np.float32([[50,50],[360,52],[28,364],[390,388]])
+pts2 = np.float32([[0,0],[310,0],[0,310],[310,310]])
+
+M = cv2.getPerspectiveTransform(pts1,pts2)
+dst = cv2.warpPerspective(img,M,(310,310))
+
+cv2.imshow("result", dst)
+cv2.waitKey(5000)
+cv2.destroyAllWindows()
+
+#3. Smoothing Images
+
 
 
 
