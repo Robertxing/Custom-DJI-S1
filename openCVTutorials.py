@@ -150,7 +150,64 @@ cv2.destroyAllWindows()
 
 #3. Smoothing Images
 
+#2D Convolution
+#low pass filters remove noise or blur image. Kernel - window centred on pixel.
+#average of pixel values inside window. 
 
+import cv2
+import numpy as np
+
+img = cv2.imread('test2.JPG')
+img = cv2.resize(img,(500,420))
+
+kernel = np.ones((3,3),np.float32)/9
+dst = cv2.filter2D(img,-1,kernel)
+
+cv2.imshow("Test Filter", img)
+cv2.waitKey(5000)
+cv2.destroyAllWindows()
+
+#4. Morphological Transformations
+
+#operations based on image shape. two inputs: Original image + kernel
+
+#erosion: removes boundaries of foreground object. PIxel in original image will be
+#a 1 if all pixels in kernel are 1 else made 0
+
+import cv2
+import numpy as np
+
+img = cv2.imread('test2.JPG',0)
+img = cv2.resize(img,(500,420))
+kernel = np.ones((5,5),np.uint8)
+erosion = cv2.erode(img,kernel,iterations=1)
+
+cv2.imshow("Erosion Test",erosion)
+cv2.waitKey(5000)
+cv2.destroyAllWindows()
+
+#dilation: pixel element is 1 if at least one pixel under kernel is 1.
+#increases white region in image
+
+import cv2
+import numpy as np
+
+img = cv2.imread('test2.JPG',0)
+img = cv2.resize(img,(500,420))
+kernel = np.ones((5,5),np.uint8)
+dilation = cv2.dilate(img, kernel, iterations = 1)
+
+cv2.imshow("DilationTest",dilation)
+cv2.waitKey(5000)
+cv2.destroyAllWindows()
+
+#5. Image Gradients
+
+#6. Canny Edge Detection
+
+#7. Template Matching
+
+#8. Hough Line Transform
 
 
 
