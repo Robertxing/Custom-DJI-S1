@@ -47,5 +47,12 @@ rover = Rover(right = (4.14),left = (17,27))
 rover.forward(100,3.0) #speed (1-255) and time in seconds
 rover.backward(100,3.0)
 
+#Basic Motion Testing:
+
+#Box
+
+
+#S-shaped
+
 
 
