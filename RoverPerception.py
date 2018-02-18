@@ -1,16 +1,15 @@
 #Ideas for robotic perception with PiCamera
 
 '''
-1. Region of interest
+1. Tracking red ball (using differential wheel design)
 2. Edge detection
-3. Tracking red ball (using differential wheel design)
-4. Threshold and warping to find obstacle free path
-5. ML for image classification (later)
+3. Threshold and warping to find obstacle free path
+4. ML for image classification (later)
 
 '''
 #Test Code
 
-#Highlighting Red ball
+#Highlighting Red ball in frames of video
 
 #extracting single color from video (red ball)
 # 1. Take each frame
@@ -54,3 +53,7 @@ for frame in camera.capture_continuous(frameCapture,format = "bgr", use_video_po
 
     if key == ord("q"):
         break
+
+#splitting frame into 4 regions (To determine amount of steering)?
+
+	
