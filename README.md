@@ -13,3 +13,12 @@ Aims
 - Implement robot motion planning
 - Carry out Python and OpenCV image processing on the Raspberry Pi
 - Create custom laser-cut/3D-printed parts to connect the hardware to LEGO
+
+Task CheckList:
+- HSV thresholding (DONE - need to remove noise)
+- Move in a square
+- Motion with keyboard/Xbox functionality
+- Motion with control feedback loop
+- Track ball with openCV
+- Rover program (autonomous)
+- Path Planning (A*)
