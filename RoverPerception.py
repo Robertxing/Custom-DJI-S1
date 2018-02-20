@@ -33,10 +33,12 @@ for frame in camera.capture_continuous(frameCapture,format = "bgr", use_video_po
 
     image = cv2.flip(image,0) #flip image to correct way up
     image = cv2.flip(image,1) #flip image left to right
+    #result = image #(for normal video)
     
-    hsv = cv2.cvtColor(image,cv2.COLOR_BGR2HSV)
-    blueLower = np.array([70,50,110])
-    blueUpper = np.array([255,255,130])
+    hsv = cv2.cvtColor(image,cv2.COLOR_BGR2HSV) 
+    #Hue (0,179), Saturation (0,255), Value (0,255)
+    redLower = np.array([50,50,110])
+    redUpper = np.array([240,240,130])
 
    #For adaptive thresholding. using mean method
    result = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY) #make grayscale 
