@@ -49,10 +49,64 @@ rover.backward(100,3.0)
 
 #Basic Motion Testing:
 
-#Box
+#Box using RobotClass
 
+from gpiozero import Robot
+from time import sleep
 
-#S-shaped
+rover = Robot((4,14),(17,27))
+
+for i in range(4):
+    rover.forward(0.2)
+    sleep(5)
+    rover.right(0.2)
+    sleep(1)
+rover.stop()
+
+#Keyboard Controlled Robot (note: works in terminal not IDLE)
+
+import curses as button
+from gpiozero import Robot
+import cv2
+
+rover = Robot((4,14),(17,27))
+
+#Create dictionary for button mapping
+actions = {
+    button.KEY_UP: rover.forward,
+    button.KEY_DOWN: rover.backward,
+    button.KEY_LEFT: rover.left,
+    button.KEY_RIGHT: rover.right,
+    }
+
+def main(window):
+    next_key = None
+    while True:
+        button.halfdelay(1)
+        if next_key is None:
+            key = window.getch()
+        else:
+            key = next_key
+            next_key = None
+        if key != -1:
+            #Key is down
+            button.halfdelay(3)
+            action = actions.get(key)
+            if action is not None:
+                action()
+            next_key = key
+            while next_key == key:
+                next_key = window.getch()
+                #Key is up
+            rover.stop()
+
+        key = cv2.waitKey(5) & 0xFF
+
+        if key == ord("q"):
+            break
+
+button.wrapper(main)
+
 
 
 
