@@ -57,10 +57,14 @@ while True:
     gyro_xout = read_word_2c(0x43)
     gyro_yout = read_word_2c(0x45)
     gyro_zout = read_word_2c(0x47)
+    
+    gyro_xscaled = gyro_xout/131 #to get degrees/sec
+    gyro_yscaled = gyro_yout/131 
+    gyro_zscaled = gyro_zout/131 
 
-    print ("gyro_xout: ", gyro_xout)
-    print ("gyro_yout: ", gyro_yout)
-    print ("gyro_zout: ", gyro_zout)
+    print ("gyro_x: ", gyro_xscaled)
+    print ("gyro_y: ", gyro_yscaled)
+    print ("gyro_z: ", gyro_zscaled)
 
     #Test Accelerometer
     accel_xout = read_word_2c(0x3b)
