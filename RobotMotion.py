@@ -158,7 +158,7 @@ def read_word(adr):
 def read_word_2c(adr):
     val = read_word(adr)
     if (val >= 0x8000):
-        return -((5535-val)+1)
+        return -((65535-val)+1)
     else:
         return val
 
@@ -172,16 +172,16 @@ while True:
     #read gyro
     gyro_zout = read_word_2c(0x47) #z-direction
 
-    #5 frame average filter
-      
-    G = gyro_zout/131
-    #G = (G1 + G2 + G3 + G4 + G5)/5 #average
-
+    #No filter
+    G = gyro_zout
+    
+    #EWMA Filter - Exponentially Weighted Moving Average Filter (later)
+    
     #Proportional controller
-    velocityR = 0.25 - (G/35)
+    velocityR = 
     motor1.forward(velocityR)
 
-    velocityL = 0.25 + (G/35)
+    velocityL = 
     motor2.forward(velocityL)
 
     sleep(2)
