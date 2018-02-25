@@ -47,8 +47,10 @@ for frame in camera.capture_continuous(frameCapture,format = "bgr", use_video_po
 	
     mask = cv2.inRange(hsv, blueLower, blueUpper)
     result = cv2.bitwise_and(image,image, mask = mask)
+    edges = v2.Canny(image,50,170)
     
-    cv2.imshow("Result",result)
+    #cv2.imshow("Result",result)
+    cv2.imshow("Edges",edges) #For canny edge detection results
     key = cv2.waitKey(5) & 0xFF
 
     frameCapture.truncate(0)
