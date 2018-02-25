@@ -172,16 +172,27 @@ while True:
     #read gyro
     gyro_zout = read_word_2c(0x47) #z-direction
 
-    #No filter
-    G = gyro_zout
+    #basic gyroscope reading for feedback control
+    rate_gyro_z = gyro_zout*0.07 #sensitivity level of 2000 dps
     
-    #EWMA Filter - Exponentially Weighted Moving Average Filter (later)
+    #EWMA Filter for feedback control
+        
+    velocityR = 0.5 - 0.02*rate_gyro_z
     
-    #Proportional controller
-    velocityR = 
+    if velocityR > 1:
+        velocityR = 1   
+    elif velocityR < 0:
+        velocityR = 0
+        
     motor1.forward(velocityR)
 
-    velocityL = 
+    velocityL = 0.5 - 0.02*rate_gyro_z
+    
+    if velocityL > 1:
+        velocityL = 1
+    elif velocityL < 0:
+        velocityL = 0
+        
     motor2.forward(velocityL)
 
     sleep(2)
