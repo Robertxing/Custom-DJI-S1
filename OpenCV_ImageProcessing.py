@@ -119,10 +119,3 @@ cv2.imshow("DilationTest",dilation)
 cv2.waitKey(5000)
 cv2.destroyAllWindows()
 
-#5. Image Gradients
-
-#6. Canny Edge Detection
-
-#7. Template Matching
-
-#8. Hough Line Transform
