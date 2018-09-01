@@ -90,5 +90,8 @@ def read_imu():
     Gx = gyro_x/131.0
     Gy = gyro_y/131.0
     Gz = gyro_z/131.0
+    
+    #append each value to array as 2-byte integers (word)    
+    readings = [Ax,Ay,Az,Gx,Gy,Gz]
 
-    return Az
+    return readings
